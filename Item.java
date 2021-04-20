@@ -1,13 +1,21 @@
+import java.util.*;
+import javax.ImageIO;
+
 public class Item
 {
 	private String name;
 	private String description;
-	
-	//FIND SUITABLE IMAGE TYPE LATER
-	private File image;
-	
 	private double price;
+	private BufferedImage image;
 	
+	public Item()
+	{
+		name = "";
+		description = "";
+		price = 0.0;
+		image = ImageIO.read(new File ("empty.png"));
+
+	}
 	public String getName()
 	{
 		return name;
