@@ -1,7 +1,9 @@
 import java.util.*;
-import PaymentInfo;
-import Item;
-import View;
+import java.time.LocalDateTime; 
+import java.time.format.DateTimeFormatter; 
+//import PaymentInfo;
+//import Item;
+//import View;
 
 public class Cart
 {
@@ -46,7 +48,7 @@ public class Cart
 
 		for( int i = 0; i < shoppingCart.size(); i++)
 		{
-			total += shoppingCart.get(i).price;
+			total += shoppingCart.get(i).getPrice();
 		}
 		
 		return total;
@@ -66,34 +68,46 @@ public class Cart
 	
 	private PaymentInfo getPaymentInfo()
 	{
-		PaymentInfo pay = new PaymentInfo();
+		return pInfo;
 	}
 	
 	public void storePaymentInfo(PaymentInfo pay)
 	{
-		
-	}
-	
-	public void storePurchaseInfo()
-	{
-		
+		pInfo = pay;
 	}
 	
 	//creates and stores the purchas time of an order
 	//format is 2021/04/19 06:15:10 
 	private void createPurchaseTime()
 	{
-		Date time = Calendar.getInstance().getTime();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
-		purchaseTime = dateFormat.formate(time);
-
+		LocalDateTime purchaseDateTime = LocalDateTime.now();
+	    DateTimeFormatter DateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); 
+		purchaseTime = DateTimeFormat.format(purchaseDateTime);
 	}
-	
 
 	//OrderID starts at 0 and increases with each subsequent order.
+	//NUMBERING SYSTEM NOT IMPLEMENTED YET
 	private void createOrderId()
 	{
-		orderId = View.currOrderId;
-		View.currOrderId++;
+		orderID = 1;
 	}
+	
+	//used to store info relavent to a cart object.
+	//should be called at purchase completion
+	public void storePurchaseInfo()
+	{
+		createPurchaseTime();
+		createOrderId();
+	}
+	
+	public int getOrderID()
+	{
+	    return orderID;
+	}
+	
+	public String getPurchaseTime()
+	{
+	    return purchaseTime;
+	}
+	
 }

@@ -1,19 +1,19 @@
 import java.util.*;
-import javax.ImageIO;
+//import javax.ImageIO;
 
 public class Item
 {
 	private String name;
 	private String description;
 	private double price;
-	private BufferedImage image;
+    //	private BufferedImage image;
 	
-	public Item()
+	public Item(String nm, String descript, double prc)
 	{
-		name = "";
-		description = "";
-		price = 0.0;
-		image = ImageIO.read(new File ("empty.png"));
+		name = nm;
+		description = descript;
+		price = prc;
+	//	image = ImageIO.read(new File ("empty.png"));
 
 	}
 	public String getName()
@@ -26,13 +26,15 @@ public class Item
 		return description;
 	}
 	
-	public File getImage()
-	{
-		return image;
-	}
-	
+/*Not yet functional
+*
+*   public File getImage()
+*	{
+*		return image;
+*   }
+*/
 	public double getPrice()
 	{
-		return double;
+		return price;
 	}
 }

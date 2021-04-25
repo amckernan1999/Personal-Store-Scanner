@@ -6,7 +6,7 @@ public class PaymentInfo
 	public String zipcode;
 	public String expDate;
 	public String ccNum;
-	public Bool saveInfo; 
+	public boolean saveInfo; 
 
 	public PaymentInfo()
 	{
@@ -16,6 +16,16 @@ public class PaymentInfo
 		expDate = "";
 		ccNum = "";
 		saveInfo = false;
+	}
+	
+	public PaymentInfo(String adr, String name, String zip, String exp, String cc, boolean save)
+	{
+	    billingAddress = adr;
+		nameOnCard = name;
+		zipcode = zip;
+		expDate = exp;
+		ccNum = cc;
+		saveInfo = save;
 	}
 	
 }

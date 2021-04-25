@@ -1,6 +1,6 @@
-
-import PaymentInfo;
-import Cart;
+    
+//import PaymentInfo;
+//import Cart;
 import java.util.*;
 
 public class User
@@ -34,15 +34,15 @@ public class User
 	}
 	
 	//compares by value saved username and input passed
-	public Bool checkUsername(String uName)
+	public boolean checkUsername(String uName)
 	{
 		return username.equals(uName);
 	}
 	
 	//compares by value saved password and input passed
-	public Bool checkPassword(String pWord)
+	public boolean checkPassword(String pWord)
 	{
-		return password.equals(pword);
+		return password.equals(pWord);
 	}
 	
 	//stores cart in array list cart history for purchase records
@@ -66,7 +66,7 @@ public class User
 	//returns info of specific payment
 	public PaymentInfo getPayment(int loc)
 	{
-		return PaymentInfo.get(loc);
+		return savedPayment.get(loc);
 	}
 
 }
