@@ -1,10 +1,13 @@
 package com.example.MyApplication;
-
+import java.util.*;
 // Accessing the SQLite libraries.
 import android.context.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+public class DB
+{
+    
 public final class FeedReaderContract {
 
     private FeedReaderContract() {}
@@ -19,13 +22,14 @@ public final class FeedReaderContract {
     }
 }
 
-//Creating the SQL items table.
+    //Creating the SQL items table.
 private static final String SQL_CREATE_ENTRIES =
         "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
         FeedEntry.COLUMN_CODE + " char(12) PRIMARY KEY, " +
         FeedEntry.COLUMN_NAME + " varchar(50) NOT NULL, " +
         FeedEntry.COLUMN_PRICE + " double NOT NULL, " +
         FeedEntry.COLUMN_DESCRIPTION + " varchar(100) NOT NULL);";
+
 
 private static final String SQL_DELETE_ENTRIES =
         "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
@@ -64,26 +68,26 @@ private void insertRecords() {
     // Create a new map of values, where column names are the keys
     // Setting the values that will be inserted into the table.
     ContentValues values = new ContentValues();
-    values.put(FeedEntry.COLUMN_CODE, '123123123123');
-    values.put(FeedEntry.COLUMN_CODE, '234234234234');
-    values.put(FeedEntry.COLUMN_CODE, '345345345345');
-    values.put(FeedEntry.COLUMN_CODE, '456456456456');
-    values.put(FeedEntry.COLUMN_CODE, '567567567567');
+    values.put(FeedEntry.COLUMN_CODE, "123123123123");
+    values.put(FeedEntry.COLUMN_CODE, "234234234234");
+    values.put(FeedEntry.COLUMN_CODE, "345345345345");
+    values.put(FeedEntry.COLUMN_CODE, "456456456456");
+    values.put(FeedEntry.COLUMN_CODE, "567567567567");
     values.put(FeedEntry.COLUMN_NAME, "Kellogg's Special K");
-    values.put(FeedEntry.COLUMN_NAME, 'Jif Peanut Butter');
-    values.put(FeedEntry.COLUMN_NAME, 'Doritos Chips');
+    values.put(FeedEntry.COLUMN_NAME, "Jif Peanut Butter");
+    values.put(FeedEntry.COLUMN_NAME, "Doritos Chips");
     values.put(FeedEntry.COLUMN_NAME, "Dave's Killer Bread");
-    values.put(FeedEntry.COLUMN_NAME, 'Chobani Greek Yogurt');
+    values.put(FeedEntry.COLUMN_NAME, "Chobani Greek Yogurt");
     values.put(FeedEntry.COLUMN_PRICE, 6.99);
     values.put(FeedEntry.COLUMN_PRICE, 5.99);
     values.put(FeedEntry.COLUMN_PRICE, 3.49);
     values.put(FeedEntry.COLUMN_PRICE, 7.99);
     values.put(FeedEntry.COLUMN_PRICE, 4.99);
-    values.put(FeedEntry.COLUMN_DESCRIPTION, 'Frosted cereal with red berries. 1 Box');
-    values.put(FeedEntry.COLUMN_DESCRIPTION, 'All natural smooth peanut butter. 1 Jar');
-    values.put(FeedEntry.COLUMN_DESCRIPTION, 'Nacho Cheese flavored. 8 Oz Bag');
-    values.put(FeedEntry.COLUMN_DESCRIPTION, '21 whole grain bread. 1 Pack');
-    values.put(FeedEntry.COLUMN_DESCRIPTION, 'Strawberry flavored. Pack of 4');
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Frosted cereal with red berries. 1 Box");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "All natural smooth peanut butter. 1 Jar");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Nacho Cheese flavored. 8 Oz Bag");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "21 whole grain bread. 1 Pack");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Strawberry flavored. Pack of 4");
 
     // Insert the new row, returning the primary key value of the new row
     // Inserting the values into the table.
@@ -93,7 +97,7 @@ private void insertRecords() {
     long newDescriptionInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_DESCRIPTION, values);
 }
 
-private ArrayList<>() selectItemCodes(String Barcode) {
+private ArrayList<String> selectItemCodes(String Barcode) {
     // Getting data from the database.
     SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -123,15 +127,15 @@ private ArrayList<>() selectItemCodes(String Barcode) {
         );
 
     // Gets all item information from barcode and creates a list
-    List itemData = new ArrayList<>();
+    ArrayList itemData = new ArrayList<String>();
     while(cursor.moveToNext()){
-        Long itemCode = cursor.getLong(
+        String itemCode = cursor.getString(
             cursor.getColumnIndex(FeedEntry.COLUMN_CODE));
         itemData.add(itemCode);
         String itemName = cursor.getString(
                 cursor.getColumnIndex(FeedEntry.COLUMN_NAME));
         itemData.add(itemName);
-        Long itemPrice = cursor.getLong(
+        String itemPrice = cursor.getString(
                 cursor.getColumnIndex(FeedEntry.COLUMN_PRICE));
         itemData.add(itemPrice);
         String itemDescpt = cursor.getString(
@@ -147,4 +151,5 @@ private ArrayList<>() selectItemCodes(String Barcode) {
 protected void onDestroy(){
     dbHelper.close();
     super.onDestroy();
+}
 }
