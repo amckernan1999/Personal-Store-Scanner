@@ -1,4 +1,3 @@
-
 package com.example.MyApplication;
 
 // Accessing the SQLite libraries.
@@ -25,7 +24,7 @@ private static final String SQL_CREATE_ENTRIES =
         "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
         FeedEntry.COLUMN_CODE + " char(12) PRIMARY KEY, " +
         FeedEntry.COLUMN_NAME + " varchar(50) NOT NULL, " +
-        FeedEntry.COLUMN_PRICE + " float NOT NULL, " +
+        FeedEntry.COLUMN_PRICE + " double NOT NULL, " +
         FeedEntry.COLUMN_DESCRIPTION + " varchar(100) NOT NULL);";
 
 private static final String SQL_DELETE_ENTRIES =
@@ -58,7 +57,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 }
-public void insertRecords() {
+private void insertRecords() {
     // Putting data into the database.
     SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -86,15 +85,15 @@ public void insertRecords() {
     values.put(FeedEntry.COLUMN_DESCRIPTION, '21 whole grain bread. 1 Pack');
     values.put(FeedEntry.COLUMN_DESCRIPTION, 'Strawberry flavored. Pack of 4');
 
-// Insert the new row, returning the primary key value of the new row
-// Inserting the values into the table.
+    // Insert the new row, returning the primary key value of the new row
+    // Inserting the values into the table.
     long newCodeInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_CODE, values);
     long newNameInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_NAME, values);
     long newPriceInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_PRICE, values);
     long newDescriptionInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_DESCRIPTION, values);
 }
 
-public ArrayList<>() selectItemCodes(String Barcode) {
+private ArrayList<>() selectItemCodes(String Barcode) {
     // Getting data from the database.
     SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -145,7 +144,7 @@ public ArrayList<>() selectItemCodes(String Barcode) {
 
 // Allows DB to be open as long as possible until DB activity is to be closed
 @Override
-portected void onDestroy(){
+protected void onDestroy(){
     dbHelper.close();
     super.onDestroy();
 }
