@@ -78,7 +78,6 @@ private void insertRecords() {
     values.put(FeedEntry.COLUMN_CODE, "070330506060");
     values.put(FeedEntry.COLUMN_CODE, "041508800082");
     values.put(FeedEntry.COLUMN_CODE, "787148244069");
-    
     values.put(FeedEntry.COLUMN_NAME, "Kellogg's Special K");
     values.put(FeedEntry.COLUMN_NAME, "Jif Peanut Butter");
     values.put(FeedEntry.COLUMN_NAME, "Doritos Chips");
@@ -89,8 +88,6 @@ private void insertRecords() {
     values.put(FeedEntry.COLUMN_NAME, "Bic White-out");
     values.put(FeedEntry.COLUMN_NAME, "San Pelligrino Mineral water");
     values.put(FeedEntry.COLUMN_NAME, "Taylor Lane Organic Coffee");
-    
-    
     values.put(FeedEntry.COLUMN_PRICE, 6.99);
     values.put(FeedEntry.COLUMN_PRICE, 5.99);
     values.put(FeedEntry.COLUMN_PRICE, 3.49);
@@ -101,7 +98,6 @@ private void insertRecords() {
     values.put(FeedEntry.COLUMN_PRICE, 2.99);
     values.put(FeedEntry.COLUMN_PRICE, 2.49);
     values.put(FeedEntry.COLUMN_PRICE, 4.72);
-    
     values.put(FeedEntry.COLUMN_DESCRIPTION, "Frosted cereal with red berries. 1 Box");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "All natural smooth peanut butter. 1 Jar");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "Nacho Cheese flavored. 8 Oz Bag");
