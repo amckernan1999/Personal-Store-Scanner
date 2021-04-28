@@ -73,22 +73,46 @@ private void insertRecords() {
     values.put(FeedEntry.COLUMN_CODE, "345345345345");
     values.put(FeedEntry.COLUMN_CODE, "456456456456");
     values.put(FeedEntry.COLUMN_CODE, "567567567567");
+    values.put(FeedEntry.COLUMN_CODE, "381370036012");
+    values.put(FeedEntry.COLUMN_CODE, "190198001757");
+    values.put(FeedEntry.COLUMN_CODE, "070330506060");
+    values.put(FeedEntry.COLUMN_CODE, "041508800082");
+    values.put(FeedEntry.COLUMN_CODE, "787148244069");
+    
     values.put(FeedEntry.COLUMN_NAME, "Kellogg's Special K");
     values.put(FeedEntry.COLUMN_NAME, "Jif Peanut Butter");
     values.put(FeedEntry.COLUMN_NAME, "Doritos Chips");
     values.put(FeedEntry.COLUMN_NAME, "Dave's Killer Bread");
     values.put(FeedEntry.COLUMN_NAME, "Chobani Greek Yogurt");
+    values.put(FeedEntry.COLUMN_NAME, "Aveeno Lotion");
+    values.put(FeedEntry.COLUMN_NAME, "Lightning to 3.5MM Adapter");
+    values.put(FeedEntry.COLUMN_NAME, "Bic White-out");
+    values.put(FeedEntry.COLUMN_NAME, "San Pelligrino Mineral water");
+    values.put(FeedEntry.COLUMN_NAME, "Taylor Lane Organic Coffee");
+    
+    
     values.put(FeedEntry.COLUMN_PRICE, 6.99);
     values.put(FeedEntry.COLUMN_PRICE, 5.99);
     values.put(FeedEntry.COLUMN_PRICE, 3.49);
     values.put(FeedEntry.COLUMN_PRICE, 7.99);
     values.put(FeedEntry.COLUMN_PRICE, 4.99);
+    values.put(FeedEntry.COLUMN_PRICE, 7.99);
+    values.put(FeedEntry.COLUMN_PRICE, 8.99);
+    values.put(FeedEntry.COLUMN_PRICE, 2.99);
+    values.put(FeedEntry.COLUMN_PRICE, 2.49);
+    values.put(FeedEntry.COLUMN_PRICE, 4.72);
+    
     values.put(FeedEntry.COLUMN_DESCRIPTION, "Frosted cereal with red berries. 1 Box");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "All natural smooth peanut butter. 1 Jar");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "Nacho Cheese flavored. 8 Oz Bag");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "21 whole grain bread. 1 Pack");
     values.put(FeedEntry.COLUMN_DESCRIPTION, "Strawberry flavored. Pack of 4");
-
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Moisturize dry skin lotion. 8 Oz pump bottle");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Adapter to connect lighting to 3.5mm headphone jack. 1 pack");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "White out 3 OZ. 1 bottle");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Natural Mineral Water. 25.3 OZ");
+    values.put(FeedEntry.COLUMN_DESCRIPTION, "Organic Sonoma Roast. 10 Oz can");
+    
     // Insert the new row, returning the primary key value of the new row
     // Inserting the values into the table.
     long newCodeInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_CODE, values);
