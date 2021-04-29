@@ -1,7 +1,8 @@
-
+package Model;
 //This class is used primarily for testing, as well as seeing showing
 //the functions should be utilized within the actual view
 
+/*
 public class Main
 {
 	public static void main(String[] args) {
@@ -116,11 +117,6 @@ public class Main
 		System.out.println("Credit Card Number: " + andrew.getPayment(0).ccNum);
 		System.out.println("Save Preference: " + andrew.getPayment(0).saveInfo);
 		
-		
-		
-		
-		
-		
-		
 	}
 }
+*/

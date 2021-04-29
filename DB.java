@@ -1,175 +1,183 @@
-package com.example.MyApplication;
+package Model;
 import java.util.*;
+
 // Accessing the SQLite libraries.
-import android.context.Context;
+
+import android.database.Cursor;
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 
 public class DB
-{
-    
-public final class FeedReaderContract {
+{/*
+    public final FeedReaderDbHelper dbHelper;
+    Context context = this.context;
 
-    private FeedReaderContract() {}
-
-    /* Inner class that defines the table contents */
-    public static class FeedEntry implements BaseColumns {
-        public static final String TABLE_NAME = "Items";
-        public static final String COLUMN_CODE = "Code";
-        public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_PRICE = "Price";
-        public static final String COLUMN_DESCRIPTION = "Description";
+    public DB(){
+        dbHelper = new FeedReaderDbHelper(context);
+        insertRecords();
     }
-}
+
+    public static final class FeedReaderContract {
+
+        private FeedReaderContract() {}
+
+        // Inner class that defines the table contents
+        public static class FeedEntry implements BaseColumns {
+            public static final String TABLE_NAME = "Items";
+            public static final String COLUMN_CODE = "Code";
+            public static final String COLUMN_NAME = "name";
+            public static final String COLUMN_PRICE = "Price";
+            public static final String COLUMN_DESCRIPTION = "Description";
+        }
+    }
 
     //Creating the SQL items table.
-private static final String SQL_CREATE_ENTRIES =
-        "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
-        FeedEntry.COLUMN_CODE + " char(12) PRIMARY KEY, " +
-        FeedEntry.COLUMN_NAME + " varchar(50) NOT NULL, " +
-        FeedEntry.COLUMN_PRICE + " double NOT NULL, " +
-        FeedEntry.COLUMN_DESCRIPTION + " varchar(100) NOT NULL);";
 
 
-private static final String SQL_DELETE_ENTRIES =
-        "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 
-public static final FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(getContext());
+    private static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.TABLE_NAME;
 
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
-    // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "GroceryItems.db";
 
-    public FeedReaderDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+    public class FeedReaderDbHelper extends SQLiteOpenHelper {
+        // If you change the database schema, you must increment the database version.
+        public static final int DATABASE_VERSION = 1;
+        public static final String DATABASE_NAME = "GroceryItems.db";
+        public String DATABASE_PATH;
+
+        private static final String SQL_CREATE_ENTRIES =
+                "CREATE TABLE " + FeedReaderContract.FeedEntry.TABLE_NAME + " (" +
+                        FeedReaderContract.FeedEntry.COLUMN_CODE + " char(12) PRIMARY KEY, " +
+                        FeedReaderContract.FeedEntry.COLUMN_NAME + " varchar(50) NOT NULL, " +
+                        FeedReaderContract.FeedEntry.COLUMN_PRICE + " double NOT NULL, " +
+                        FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION + " varchar(100) NOT NULL);";
+
+        public FeedReaderDbHelper(Context context) {
+
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            DATABASE_PATH = context.getDatabasePath(DATABASE_NAME).getPath();
+        }
+
+        // This is called the first time the database is accessed.
+        // This is creating the items database table.
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+
+            db.execSQL(SQL_CREATE_ENTRIES);
+        }
+        // This is called if the database version number changes. It prevents previous users apps from crashing.
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // This database is only a cache for online data, so its upgrade policy is
+            // to simply to discard the data and start over
+            db.execSQL(SQL_DELETE_ENTRIES);
+            onCreate(db);
+        }
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
+        }
     }
-    // This is called the first time the database is accessed.
-    // This is creating the items database table.
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+
+    private void insertRecords() {
+        // Putting data into the database.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
+        // Setting the values that will be inserted into the table.
+        ContentValues values = new ContentValues();
+        values.put(FeedReaderContract.FeedEntry.COLUMN_CODE, "381370036012");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_CODE, "190198001757");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_CODE, "070330506060");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_CODE, "041508800082");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_CODE, "787148244069");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "Aveeno Lotion");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "Lightning to 3.5MM Adapter");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "Bic White-out");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "San Pelligrino Mineral water");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_NAME, "Taylor Lane Organic Coffee");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_PRICE, 8.54);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_PRICE, 7.99);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_PRICE, 6.51);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_PRICE, 1.45);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_PRICE, 17.99);
+        values.put(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, "18 Fl Oz daily moisturizer ");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, "Apple lightning to headphone jack adapter");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, "2 Pack quick dry correction fluid");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, "12oz Single Can");
+        values.put(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, "10oz Goat Rock Roast");
+
+        // Insert the new row, returning the primary key value of the new row
+        // Inserting the values into the table.
+        long newCodeInsert = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, FeedReaderContract.FeedEntry.COLUMN_CODE, values);
+        long newNameInsert = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, FeedReaderContract.FeedEntry.COLUMN_NAME, values);
+        long newPriceInsert = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, FeedReaderContract.FeedEntry.COLUMN_PRICE, values);
+        long newDescriptionInsert = db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION, values);
+        dbHelper.close();
     }
-    // This is called if the database version number changes. It prevents previous users apps from crashing.
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
-        db.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(db);
-    }
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
-    }
-}
-private void insertRecords() {
-    // Putting data into the database.
-    SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-    // Create a new map of values, where column names are the keys
-    // Setting the values that will be inserted into the table.
-    ContentValues values = new ContentValues();
-    values.put(FeedEntry.COLUMN_CODE, "123123123123");
-    values.put(FeedEntry.COLUMN_CODE, "234234234234");
-    values.put(FeedEntry.COLUMN_CODE, "345345345345");
-    values.put(FeedEntry.COLUMN_CODE, "456456456456");
-    values.put(FeedEntry.COLUMN_CODE, "567567567567");
-    values.put(FeedEntry.COLUMN_CODE, "381370036012");
-    values.put(FeedEntry.COLUMN_CODE, "190198001757");
-    values.put(FeedEntry.COLUMN_CODE, "070330506060");
-    values.put(FeedEntry.COLUMN_CODE, "041508800082");
-    values.put(FeedEntry.COLUMN_CODE, "787148244069");
-    values.put(FeedEntry.COLUMN_NAME, "Kellogg's Special K");
-    values.put(FeedEntry.COLUMN_NAME, "Jif Peanut Butter");
-    values.put(FeedEntry.COLUMN_NAME, "Doritos Chips");
-    values.put(FeedEntry.COLUMN_NAME, "Dave's Killer Bread");
-    values.put(FeedEntry.COLUMN_NAME, "Chobani Greek Yogurt");
-    values.put(FeedEntry.COLUMN_NAME, "Aveeno Lotion");
-    values.put(FeedEntry.COLUMN_NAME, "Lightning to 3.5MM Adapter");
-    values.put(FeedEntry.COLUMN_NAME, "Bic White-out");
-    values.put(FeedEntry.COLUMN_NAME, "San Pelligrino Mineral water");
-    values.put(FeedEntry.COLUMN_NAME, "Taylor Lane Organic Coffee");
-    values.put(FeedEntry.COLUMN_PRICE, 6.99);
-    values.put(FeedEntry.COLUMN_PRICE, 5.99);
-    values.put(FeedEntry.COLUMN_PRICE, 3.49);
-    values.put(FeedEntry.COLUMN_PRICE, 7.99);
-    values.put(FeedEntry.COLUMN_PRICE, 4.99);
-    values.put(FeedEntry.COLUMN_PRICE, 7.99);
-    values.put(FeedEntry.COLUMN_PRICE, 8.99);
-    values.put(FeedEntry.COLUMN_PRICE, 2.99);
-    values.put(FeedEntry.COLUMN_PRICE, 2.49);
-    values.put(FeedEntry.COLUMN_PRICE, 4.72);
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Frosted cereal with red berries. 1 Box");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "All natural smooth peanut butter. 1 Jar");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Nacho Cheese flavored. 8 Oz Bag");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "21 whole grain bread. 1 Pack");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Strawberry flavored. Pack of 4");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Moisturize dry skin lotion. 8 Oz pump bottle");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Adapter to connect lighting to 3.5mm headphone jack. 1 pack");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "White out 3 OZ. 1 bottle");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Natural Mineral Water. 25.3 OZ");
-    values.put(FeedEntry.COLUMN_DESCRIPTION, "Organic Sonoma Roast. 10 Oz can");
-    
-    // Insert the new row, returning the primary key value of the new row
-    // Inserting the values into the table.
-    long newCodeInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_CODE, values);
-    long newNameInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_NAME, values);
-    long newPriceInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_PRICE, values);
-    long newDescriptionInsert = db.insert(FeedEntry.TABLE_NAME, FeedEntry.COLUMN_DESCRIPTION, values);
-}
+    private ArrayList<String> selectItemCodes(String Barcode) {
+        // Getting data from the database.
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-private ArrayList<String> selectItemCodes(String Barcode) {
-    // Getting data from the database.
-    SQLiteDatabase db = dbHelper.getReadableDatabase();
+        // Defines a projection that specifies which columns from the database
+        // you will actually use after this query is executed.
+        String[] projection = {
+                FeedReaderContract.FeedEntry.COLUMN_CODE,
+                FeedReaderContract.FeedEntry.COLUMN_NAME,
+                FeedReaderContract.FeedEntry.COLUMN_PRICE,
+                FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION
+        };
 
-    // Defines a projection that specifies which columns from the database
-    // you will actually use after this query is executed.
-    String[] projection = {
-        BaseColumns.COLUMN_CODE,
-        FeedEntry.COLUMN_NAME,
-        FeedEntry.COLUMN_PRICE,
-        FeedEntry.COLUMN_DESCRIPTION
-    };
+        // This is the SSQL where clause arg
+        String selection = FeedReaderContract.FeedEntry.COLUMN_CODE + " = ?";
+        // Insert the scanner class object for the barcade
+        String[] selectionArgs = { Barcode };
 
-    // This is the SSQL where clause arg
-    String selection = FeedEntry.COLUMN_CODE + " = ?";
-    // Insert the scanner class object for the barcade
-    String[] selectionArgs = { Barcode };
-
-    // This is the query being called
-    Cursor cursor = db.query(
-        FeedEntry.TABLE_NAME,
-        projection,
-        selection,
-        selectionArgs,
-        null,
-        null,
-        sortOrder
+        // This is the query being called
+        Cursor cursor = db.query(
+                FeedReaderContract.FeedEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
         );
 
-    // Gets all item information from barcode and creates a list
-    ArrayList itemData = new ArrayList<String>();
-    while(cursor.moveToNext()){
-        String itemCode = cursor.getString(
-            cursor.getColumnIndex(FeedEntry.COLUMN_CODE));
-        itemData.add(itemCode);
-        String itemName = cursor.getString(
-                cursor.getColumnIndex(FeedEntry.COLUMN_NAME));
-        itemData.add(itemName);
-        String itemPrice = cursor.getString(
-                cursor.getColumnIndex(FeedEntry.COLUMN_PRICE));
-        itemData.add(itemPrice);
-        String itemDescpt = cursor.getString(
-                cursor.getColumnIndex(FeedEntry.COLUMN_DESCRIPTION));
-        itemData.add(itemDescpt);
+        // Gets all item information from barcode and creates a list
+        ArrayList itemData = new ArrayList<String>();
+        while(cursor.moveToNext()){
+            String itemCode = cursor.getString(
+                    cursor.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_CODE));
+            itemData.add(itemCode);
+            String itemName = cursor.getString(
+                    cursor.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_NAME));
+            itemData.add(itemName);
+            String itemPrice = cursor.getString(
+                    cursor.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_PRICE));
+            itemData.add(itemPrice);
+            String itemDescpt = cursor.getString(
+                    cursor.getColumnIndex(FeedReaderContract.FeedEntry.COLUMN_DESCRIPTION));
+            itemData.add(itemDescpt);
+        }
+        cursor.close();
+        return itemData;
     }
-    cursor.close();
-    return itemData;
-}
+    public Item getItem(String code) {
 
-// Allows DB to be open as long as possible until DB activity is to be closed
-@Override
-protected void onDestroy(){
-    dbHelper.close();
-    super.onDestroy();
-}
-}
+        ArrayList<String> tempItem = selectItemCodes(code);
+        Item item = new Item(tempItem.get(1), tempItem.get(3), Double.parseDouble(tempItem.get(2)));
+        return item;
+
+    }
+    // Allows DB to be open as long as possible until DB activity is to be closed
+    *//*
+    @Override
+    protected void onDestroy(){
+        dbHelper.close();
+        super.onDestroy();
+    }*//*
+*/}
