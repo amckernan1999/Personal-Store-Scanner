@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.*;
 import java.time.LocalDateTime; 
 import java.time.format.DateTimeFormatter; 
@@ -18,6 +20,10 @@ public class Cart
 		purchaseTime = "";
 		orderID = 0;
 		pInfo = new PaymentInfo();	
+	}
+	//returns the size of the cart
+	public int cartSize(){
+		return shoppingCart.size();
 	}
 	
 	//adds n products into the shopping cart
